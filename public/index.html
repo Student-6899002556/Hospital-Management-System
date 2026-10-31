@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CarePoint | Hospital Management</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script defer src="/js/app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-icon">✚</span><span>CarePoint<small>HOSPITAL SYSTEM</small></span></a>
+      <div class="nav-label">WORKSPACE</div>
+      <nav id="main-nav">
+        <button class="nav-item active" data-view="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-item" data-view="patients"><span>♙</span> Patients</button>
+        <button class="nav-item" data-view="doctors"><span>⚕</span> Doctors</button>
+        <button class="nav-item" data-view="appointments"><span>▣</span> Appointments</button>
+        <button class="nav-item" data-view="prescriptions"><span>▤</span> Prescriptions</button>
+        <button class="nav-item" data-view="billing"><span>▧</span> Billing</button>
+        <button class="nav-item" data-view="payments"><span>＄</span> Payments</button>
+        <button class="nav-item" data-view="reports"><span>▥</span> Reports</button>
+        <button class="nav-item" data-view="audit"><span>◷</span> Audit log</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="avatar">AD</div><div><strong>Administrator</strong><small>Hospital staff</small></div><span class="online-dot"></span></div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar">
+        <div><div class="eyebrow">HOSPITAL ADMINISTRATION</div><h1 id="page-title">Dashboard overview</h1></div>
+        <div class="top-actions"><span class="today" id="today-label"></span><button class="icon-button" title="Refresh" id="refresh-btn">↻</button><div class="top-avatar">AD</div></div>
+      </header>
+      <div id="toast" class="toast" role="status"></div>
+      <section id="view-dashboard" class="view active">
+        <div class="welcome-row"><div><h2>Good day, Administrator 👋</h2><p>Here’s what’s happening at your hospital today.</p></div><button class="primary-btn" data-action="quick-appointment">＋ Book appointment</button></div>
+        <div id="stats-grid" class="stats-grid"></div>
+        <div class="content-grid">
+          <div class="panel wide-panel"><div class="panel-heading"><div><h3>Recent appointments</h3><p>Latest activity across the hospital</p></div><button class="text-btn" data-view="appointments">View all →</button></div><div id="recent-appointments"></div></div>
+          <div class="panel"><div class="panel-heading"><div><h3>Monthly revenue</h3><p>Payments received</p></div></div><div id="revenue-chart" class="revenue-chart"></div></div>
+        </div>
+      </section>
+
+      <section id="view-patients" class="view">
+        <div class="section-toolbar"><div><h2>Patient management</h2><p>Register patients and maintain patient records.</p></div><button class="primary-btn" data-action="new-patient">＋ Add patient</button></div>
+        <div class="panel"><div class="table-toolbar"><input id="patient-search" class="search-input" placeholder="Search name, phone, or patient ID…"><span id="patient-count" class="muted"></span></div><div id="patients-table" class="table-wrap"></div></div>
+      </section>
+
+      <section id="view-doctors" class="view">
+        <div class="section-toolbar"><div><h2>Doctor directory</h2><p>Manage clinicians, specializations, and consultation fees.</p></div><button class="primary-btn" data-action="new-doctor">＋ Add doctor</button></div>
+        <div class="panel"><div class="table-toolbar"><input id="doctor-search" class="search-input" placeholder="Search doctors or specialization…"></div><div id="doctors-table" class="table-wrap"></div></div>
+        <div class="panel sub-panel"><div class="panel-heading"><div><h3>Doctor availability</h3><p>Working days and appointment hours</p></div><button class="secondary-btn" data-action="new-availability">＋ Add hours</button></div><div id="availability-table" class="table-wrap"></div></div>
+      </section>
+
+      <section id="view-appointments" class="view">
+        <div class="section-toolbar"><div><h2>Appointments</h2><p>Book, filter, complete, and cancel appointments.</p></div><button class="primary-btn" data-action="new-appointment">＋ Book appointment</button></div>
+        <div class="panel"><div class="table-toolbar filters"><input type="date" id="appointment-date-filter" class="form-control"><select id="appointment-status-filter" class="form-control"><option value="">All statuses</option><option>Scheduled</option><option>Completed</option><option>Cancelled</option></select><button class="secondary-btn" id="clear-appointment-filters">Clear filters</button></div><div id="appointments-table" class="table-wrap"></div></div>
+      </section>
+
+      <section id="view-prescriptions" class="view">
+        <div class="section-toolbar"><div><h2>Prescriptions</h2><p>Prescription medicine items linked to completed visits.</p></div><button class="primary-btn" data-action="new-prescription">＋ Add prescription</button></div>
+        <div class="panel"><div class="table-toolbar"><input id="prescription-search" class="search-input" placeholder="Search medicine, patient, or doctor…"></div><div id="prescriptions-table" class="table-wrap"></div></div>
+      </section>
+
+      <section id="view-billing" class="view">
+        <div class="section-toolbar"><div><h2>Billing</h2><p>Generate bills for completed appointments and track balances.</p></div><button class="primary-btn" data-action="new-bill">＋ Generate bill</button></div>
+        <div class="panel"><div id="bills-table" class="table-wrap"></div></div>
+      </section>
+
+      <section id="view-payments" class="view">
+        <div class="section-toolbar"><div><h2>Payments</h2><p>Record cash, card, or UPI payments including partial payments.</p></div><button class="primary-btn" data-action="new-payment">＋ Record payment</button></div>
+        <div class="panel"><div id="payments-table" class="table-wrap"></div></div>
+      </section>
+
+      <section id="view-reports" class="view">
+        <div class="section-toolbar"><div><h2>Reports & analytics</h2><p>Review appointment activity, revenue, and outstanding balances.</p></div></div>
+        <div class="report-cards">
+          <div class="panel"><h3>Appointment report</h3><p class="muted">Daily counts by appointment status.</p><div id="appointment-report"></div></div>
+          <div class="panel"><h3>Monthly revenue report</h3><p class="muted">Revenue from recorded payments.</p><div id="revenue-report"></div></div>
+          <div class="panel full-report"><h3>Outstanding bills</h3><div id="outstanding-report"></div></div>
+        </div>
+      </section>
+
+      <section id="view-audit" class="view">
+        <div class="section-toolbar"><div><h2>Audit log</h2><p>Track appointment status changes and payment activity.</p></div></div>
+        <div class="panel"><div id="audit-table" class="table-wrap"></div></div>
+      </section>
+      <footer>CarePoint Hospital Management System <span>• Academic project demonstration</span></footer>
+    </main>
+  </div>
+  <dialog id="modal"><div class="modal-head"><div><div class="eyebrow">CAREPOINT RECORDS</div><h2 id="modal-title">Add record</h2></div><button class="icon-button" id="modal-close" type="button">×</button></div><form id="modal-form"><div id="modal-fields" class="form-grid"></div><div class="modal-actions"><button class="secondary-btn" type="button" id="modal-cancel">Cancel</button><button class="primary-btn" type="submit" id="modal-submit">Save record</button></div></form></dialog>
+</body>
+</html>
